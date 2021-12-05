@@ -7,7 +7,7 @@ from .serializer import ShopListSerializer
 
 # Create your views here.
 @api_view(['GET'])
-def apiOverview(request):
+def api_overview(request):
     api_urls = {
         'Shop List': '/product-list/',
         'Detail View': '/product-detail/<int:pk>/',
@@ -20,7 +20,7 @@ def apiOverview(request):
 
 
 @api_view(['GET'])
-def productList(request):
+def product_list(request):
     products = ShopList.objects.all()
     serializer = ShopListSerializer(products, many=True)
 
@@ -28,7 +28,7 @@ def productList(request):
 
 
 @api_view(['GET'])
-def productDetail(request, pk=None):
+def product_detail(request, pk=None):
     product = ShopList.objects.get(id=pk)
     serializer = ShopListSerializer(product, many=False)
 
@@ -36,7 +36,7 @@ def productDetail(request, pk=None):
 
 
 @api_view(['POST'])
-def productCreate(request):
+def product_create(request):
     serializer = ShopListSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -45,7 +45,7 @@ def productCreate(request):
 
 
 @api_view(['POST'])
-def productUpdate(request, pk=None):
+def product_update(request, pk=None):
     product = ShopList.objects.get(id=pk)
     serializer = ShopListSerializer(instance=product, data=request.data)
     if serializer.is_valid():
@@ -55,7 +55,7 @@ def productUpdate(request, pk=None):
 
 
 @api_view(['DELETE'])
-def productDelete(request, pk=None):
+def product_delete(request, pk=None):
     product = ShopList.objects.get(id=pk)
     product.delete()
 
